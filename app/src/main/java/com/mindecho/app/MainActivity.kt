@@ -9,11 +9,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.mindecho.app.ui.home.HomeScreen
 import com.mindecho.app.ui.home.HomeViewModel
 import com.mindecho.app.ui.widget.MindEchoGlanceWidget
@@ -28,7 +28,9 @@ class MainActivity : ComponentActivity() {
         const val ACTION_TRIGGER_VOICE = "com.mindecho.app.ACTION_TRIGGER_VOICE"
     }
 
-    private val homeViewModel: HomeViewModel by viewModels()
+    private val homeViewModel: HomeViewModel by lazy {
+        ViewModelProvider(this)[HomeViewModel::class.java]
+    }
     private var triggerVoiceImmediately by mutableStateOf(false)
 
     private val requestPermissionLauncher = registerForActivityResult(

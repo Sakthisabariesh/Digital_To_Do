@@ -31,7 +31,7 @@ import androidx.glance.text.FontFamily
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
-import androidx.glance.unit.ColorProvider
+import androidx.glance.color.ColorProvider
 import com.mindecho.app.MainActivity
 import com.mindecho.app.data.local.AppDatabase
 import com.mindecho.app.data.local.TaskEntity
@@ -46,9 +46,7 @@ import java.util.Locale
 /**
  * Helper to produce an unambiguous Glance ColorProvider.
  */
-private fun glanceColor(color: Color): ColorProvider = object : ColorProvider {
-    override fun getColor(context: Context): Color = color
-}
+private fun glanceColor(color: Color): ColorProvider = ColorProvider(color)
 
 /**
  * Ultra-lightweight, battery-efficient Jetpack Glance Home Screen Widget for MindEcho.

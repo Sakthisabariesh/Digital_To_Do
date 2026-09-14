@@ -14,8 +14,8 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "tasks",
     indices = [
-        Index(value = ["triggerTimestamp"], name = "idx_task_trigger_timestamp"),
-        Index(value = ["createdAt"], name = "idx_task_created_at")
+        Index(value = ["trigger_timestamp"], name = "idx_task_trigger_timestamp"),
+        Index(value = ["created_at"], name = "idx_task_created_at")
     ]
 )
 data class TaskEntity(
