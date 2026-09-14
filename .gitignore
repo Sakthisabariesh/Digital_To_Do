@@ -14,3 +14,6 @@
 .cxx
 local.properties
 app/build/
+
+# Do not ignore the gradle wrapper binary
+!gradle/wrapper/gradle-wrapper.jar
