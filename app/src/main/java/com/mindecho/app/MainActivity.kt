@@ -65,7 +65,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Refresh widget when returning to app
         CoroutineScope(Dispatchers.IO).launch {
             MindEchoGlanceWidget.refreshAll(applicationContext)
         }
