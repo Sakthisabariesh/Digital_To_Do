@@ -61,7 +61,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             // Refresh Glance Home Widget
-            MindEchoGlanceWidget.refreshAll(getApplication())
+            MindEchoGlanceWidget.refreshAll(getApplication<Application>())
         }
     }
 
@@ -73,7 +73,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             // Refresh Glance Home Widget
-            MindEchoGlanceWidget.refreshAll(getApplication())
+            MindEchoGlanceWidget.refreshAll(getApplication<Application>())
         }
     }
 
@@ -93,7 +93,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             // Refresh Glance Home Widget
-            MindEchoGlanceWidget.refreshAll(getApplication())
+            MindEchoGlanceWidget.refreshAll(getApplication<Application>())
         }
     }
 }

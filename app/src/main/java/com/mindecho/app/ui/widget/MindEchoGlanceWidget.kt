@@ -36,13 +36,19 @@ import com.mindecho.app.MainActivity
 import com.mindecho.app.data.local.AppDatabase
 import com.mindecho.app.data.local.TaskEntity
 import com.mindecho.app.data.util.TaskDateUtils
-import com.mindecho.app.nlp.TimeIntentParser
 import kotlinx.coroutines.flow.firstOrNull
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+
+/**
+ * Helper to produce an unambiguous Glance ColorProvider.
+ */
+private fun glanceColor(color: Color): ColorProvider = object : ColorProvider {
+    override fun getColor(context: Context): Color = color
+}
 
 /**
  * Ultra-lightweight, battery-efficient Jetpack Glance Home Screen Widget for MindEcho.
@@ -107,11 +113,18 @@ private fun WidgetContent(
         "No alarms"
     }
 
+    val surfaceColor = glanceColor(Color(0xFF0C0C0E))
+    val cyanColor = glanceColor(Color(0xFF64B5F6))
+    val whiteColor = glanceColor(Color(0xFFF5F5F7))
+    val greenColor = glanceColor(Color(0xFF81C784))
+    val mutedColor = glanceColor(Color(0xFF8E8E93))
+    val darkBlueColor = glanceColor(Color(0xFF0A1929))
+
     // AMOLED Black Surface container
     Box(
         modifier = GlanceModifier
             .fillMaxSize()
-            .background(ColorProvider(Color(0xFF0C0C0E)))
+            .background(surfaceColor)
             .cornerRadius(18.dp)
             .padding(14.dp)
             .clickable(actionStartActivity(openAppIntent))
@@ -123,14 +136,14 @@ private fun WidgetContent(
         ) {
             // Left Information Column
             Column(
-                modifier = GlanceModifier.defaultWeight(),
+                modifier = GlanceModifier.fillMaxWidth().padding(end = 60.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // System Monospace Tag
                 Text(
                     text = "[MINDECHO OFFLINE]",
                     style = TextStyle(
-                        color = ColorProvider(Color(0xFF64B5F6)),
+                        color = cyanColor,
                         fontSize = 10.sp,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.Bold
@@ -143,7 +156,7 @@ private fun WidgetContent(
                 Text(
                     text = if (pendingCount == 1) "1 Pending Task" else "$pendingCount Pending Tasks",
                     style = TextStyle(
-                        color = ColorProvider(Color(0xFFF5F5F7)),
+                        color = whiteColor,
                         fontSize = 15.sp,
                         fontWeight = FontWeight.Bold
                     )
@@ -158,7 +171,7 @@ private fun WidgetContent(
                     Text(
                         text = "⏰ Next: $nextReminderStr",
                         style = TextStyle(
-                            color = ColorProvider(if (nextTask != null) Color(0xFF81C784) else Color(0xFF8E8E93)),
+                            color = if (nextTask != null) greenColor else mutedColor,
                             fontSize = 11.sp,
                             fontFamily = FontFamily.Monospace,
                             fontWeight = FontWeight.Medium
@@ -167,13 +180,11 @@ private fun WidgetContent(
                 }
             }
 
-            Spacer(modifier = GlanceModifier.width(10.dp))
-
             // Right 1-Tap Instant Voice Trigger Button
             Box(
                 modifier = GlanceModifier
                     .size(52.dp)
-                    .background(ColorProvider(Color(0xFF64B5F6)))
+                    .background(cyanColor)
                     .cornerRadius(26.dp)
                     .clickable(actionStartActivity(voiceLaunchIntent)),
                 contentAlignment = Alignment.Center
@@ -181,7 +192,7 @@ private fun WidgetContent(
                 Text(
                     text = "MIC",
                     style = TextStyle(
-                        color = ColorProvider(Color(0xFF0A1929)),
+                        color = darkBlueColor,
                         fontSize = 12.sp,
                         fontFamily = FontFamily.Monospace,
                         fontWeight = FontWeight.Bold
