@@ -31,7 +31,7 @@ import androidx.glance.text.FontFamily
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
-import androidx.glance.color.ColorProvider
+import androidx.glance.unit.ColorProvider
 import com.mindecho.app.MainActivity
 import com.mindecho.app.data.local.AppDatabase
 import com.mindecho.app.data.local.TaskEntity
@@ -134,7 +134,7 @@ private fun WidgetContent(
         ) {
             // Left Information Column
             Column(
-                modifier = GlanceModifier.fillMaxWidth().padding(end = 60.dp),
+                modifier = GlanceModifier.defaultWeight().padding(end = 12.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 // System Monospace Tag
